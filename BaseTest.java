@@ -1,19 +1,14 @@
-import java.util.Scanner;
+//import java.util.Scanner;
 
 public class BaseTest {
     public static void main(String[] args) {
-        int num1 = 10;
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("あなたの名前を教えてください");
-        String name = sc.nextLine();
-
-        System.out.println("こんにちは " + name + " さん! " + num1 + " に足す値を入力してください");
-        int num2 = sc.nextInt();
-
-        int result = num1 + num2;
-        System.out.println("num1 + num2 = " + result + " です");
-
-        sc.close();
+        final int MAX_VALUE = 10;
+        for (int i = 1; i < MAX_VALUE; i++) {
+            for (int j = 1; j < MAX_VALUE; j++) {
+                int result = i * j;
+                System.out.printf("%2d  × %2d = %2d\n", i, j, result);
+            }
+            System.out.println();
+        }
     }
 }
