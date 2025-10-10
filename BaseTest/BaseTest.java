@@ -3,14 +3,17 @@ import java.util.Scanner;
 
 public class BaseTest {
     public static void main(String[] args) {
+        // 入力を受け取るScannerと、乱数を生成するRandomの宣言
         Scanner sc = new Scanner(System.in);
         Random rand = new Random();
-
+        // 敵とプレイヤーの手を管理する変数（0=グー, 1=チョキ, 2=パー）
         int m_EnemyHand = 0;
         int m_PlayerHand = 0;
+        // 決着判定
         boolean m_Finish = false;
         System.out.println("じゃんけんをはじめます!じゃーんけーんぽい!");
 
+        // 勝敗がつくまで繰り返す
         while (!m_Finish) {
             System.out.println("出す手を決めてください,0ならグー,1ならチョキ,2ならパー");
             // 0~2までの乱数を入れる(0 = グー: 1 = チョキ: 2 = パー )
@@ -18,8 +21,10 @@ public class BaseTest {
             // データの整数チェック
             if (sc.hasNextInt()) {
                 m_PlayerHand = sc.nextInt();// プレイヤーの出した手
+                // プレイヤーの手と敵の手を表示
                 System.out.println(
                         "プレイヤーが出した手は" + HandMassege(m_PlayerHand) + "です。敵が出した手は" + HandMassege(m_EnemyHand) + "です。");
+                // 出した手が0~2なのを確認
                 if (m_PlayerHand >= 0 && m_PlayerHand <= 2) {
                     if (m_EnemyHand == m_PlayerHand) {
                         System.out.println("あいこです。もう一回やりましょう");
@@ -34,9 +39,12 @@ public class BaseTest {
                     }
                 } else {
                     System.out.println("範囲外の数字です");
+                    continue;
                 }
             } else {
                 System.out.println("整数ではないのでエラーです");
+                sc.next(); // ★ 無効トークンを捨てる
+                continue; // ★ 再入力へ
             }
         }
         sc.close();
