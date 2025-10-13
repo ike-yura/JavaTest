@@ -1,6 +1,5 @@
 public class Counter {
-    private int m_Count = 0;
-
+    // コンストラクタ
     Counter(final int count) {
         if (count >= 0) {
             m_Count = count;
@@ -28,4 +27,8 @@ public class Counter {
     public int getCount() {
         return m_Count;
     }
+
+    // メンバ変数
+    private int m_Count = 0;
+
 }

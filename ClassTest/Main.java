@@ -1,18 +1,16 @@
 public class Main {
     public static void main(String[] args) {
-        //
-        Counter c1 = new Counter(0);
-        Counter c2 = new Counter(5);
+        BankAccount bank_Account = new BankAccount("ike");
+        BankAccount bank_Account2 = new BankAccount("mudo", 200);
 
-        // 加算をしている
-        c1.increment(); // 1
-        c1.increment(); // 2
-        // 表示
-        System.out.println(c1.toString()); // 2
-        // 値リセット
-        c1.reset(); // 0
-        // 表示
-        System.out.println(c1.toString()); // 0
-        System.out.println(c2.toString()); // 「現在のカウント：5」
+        // まず加算する
+        bank_Account.deposit(300);
+        bank_Account2.deposit(2000);
+        // 減算する
+        bank_Account.withdraw(0);
+        bank_Account2.withdraw(1000);
+
+        System.out.println(bank_Account); // toString() が自動で呼ばれる
+        System.out.println(bank_Account2);
     }
 }
