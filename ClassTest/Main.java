@@ -5,30 +5,29 @@ import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
-        Point p1 = new Point(1, 2);
-        Point p2 = new Point(1, 2);
-        Point p3 = new Point(2, 1);
+        // ① 同じ値の比較テスト
+        Name n1 = new Name("Ikeuchi", "Yura");
+        Name n2 = new Name("Ikeuchi", "Yura");
+        System.out.println("n1.equals(n2) = " + n1.equals(n2)); // true になるべき
 
-        System.out.println(p1);
+        // ② hashCodeの一致確認
+        System.out.println("hashCode n1 = " + n1.hashCode());
+        System.out.println("hashCode n2 = " + n2.hashCode());
 
-        // 2) equals：同値/非同値
-        System.out.println("p1.equals(p2) = " + p1.equals(p2)); // true
-        System.out.println("p1.equals(p3) = " + p1.equals(p3)); // false
+        // ③ HashSetに入るか確認（重複が消えるか）
+        Set<Name> set = new HashSet<>();
+        set.add(n1);
+        set.add(n2); // 同じ値なので追加されないはず
+        System.out.println("Set size = " + set.size()); // 1になるべき
 
-        // 3) 参照比較(==)は“同一インスタンスか”の判定
-        System.out.println("p1 == p2 ? " + (p1 == p2)); // false（別インスタンス）
+        // ④ HashMapでキーに使えるか
+        Map<Name, String> map = new HashMap<>();
+        map.put(n1, "first");
+        map.put(n2, "second"); // 上書きされるはず
+        System.out.println("Map size = " + map.size()); // 1になるべき
 
-        // 4) Setでの重複判定（equals/hashCode の整合性テスト）
-        Set<Point> set = new HashSet<>();
-        set.add(p1);
-        set.add(p2); // 同値なので追加されないはず
-        set.add(p3);
-        System.out.println("set size = " + set.size()); // 2 になるのが正解
-
-        // 5) Mapのキー検証（同値キーでgetできるか）
-        Map<Point, String> map = new HashMap<>();
-        map.put(p1, "hello");
-        System.out.println(map.get(p2)); // "hello"（同値キーで取得できる）
-
+        // ⑤ toString動作確認
+        System.out.println(n1.getFullName());
+        System.out.println(n1);
     }
 }
