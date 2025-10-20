@@ -29,5 +29,11 @@ public class Main {
 
         System.out.println(item1);
         System.out.println(item2);
+
+        // Invectory関係
+        InventoryItem invent_item = new InventoryItem(item1, 3).increase(3);
+        System.out.println(invent_item);
+        invent_item = invent_item.decrease(4);
+        System.out.println(invent_item);
     }
 }
