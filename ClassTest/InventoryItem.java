@@ -24,7 +24,7 @@ public final class InventoryItem {
     // 加算
     public InventoryItem increase(int delta) {
         if (delta <= 0) {
-            throw new IllegalArgumentException("deltaが0未満です");// 例外投げる。
+            throw new IllegalArgumentException("deltaが0以下です");// 例外投げる。
         }
         return new InventoryItem(m_item, m_quantity + delta);
     }
@@ -32,7 +32,7 @@ public final class InventoryItem {
     // 減算
     public InventoryItem decrease(int delta) {
         if (delta <= 0 || delta > m_quantity) {
-            throw new IllegalArgumentException("deltaが0未満かdeltaがquantity以上です");// 例外投げる。
+            throw new IllegalArgumentException("deltaが0以下かdeltaがquantity以上です");// 例外投げる。
         }
         return new InventoryItem(m_item, m_quantity - delta);
     }
