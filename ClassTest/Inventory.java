@@ -2,6 +2,7 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
+//複数のInventoryItemを管理するクラス
 public class Inventory {
     // メンバ変数
     private final Map<String, InventoryItem> m_items = new HashMap<>();

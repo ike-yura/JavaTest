@@ -1,5 +1,6 @@
 import java.math.BigDecimal;
 
+//アイテムを所持個数を管理するクラス
 public final class InventoryItem {
     // メンバ変数
     private final Item m_item;

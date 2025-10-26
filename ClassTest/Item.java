@@ -1,6 +1,7 @@
 import java.math.BigDecimal;
 import java.util.Objects;
 
+//一個の商品の名前や価格を管理しているクラス
 public final class Item {
     // メンバ変数
     private final String m_id;
