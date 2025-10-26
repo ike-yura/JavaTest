@@ -104,6 +104,19 @@ public class Inventory {
         return l_total;
     }
 
+    // トータルの重量を計算
+    public BigDecimal getTotalWeight() {
+        BigDecimal l_total = BigDecimal.ZERO;
+
+        for (InventoryItem item : m_items.values()) {
+            Item l_item = item.getItem();
+            BigDecimal l_weight = l_item.getWeight();
+            int l_quantity = item.getQuantity();
+            l_total = l_total.add(l_weight.multiply(BigDecimal.valueOf(l_quantity)));
+        }
+        return l_total;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

@@ -7,8 +7,9 @@ public final class Item {
     private final String m_id;
     private final String m_name;
     private final BigDecimal m_unitPrice;
+    private final BigDecimal m_weight;
 
-    public Item(String id, String name, BigDecimal unitPrice) {
+    public Item(String id, String name, BigDecimal unitPrice, BigDecimal weight) {
         // idの処理
         if (id == null || id.isBlank()) {
             throw new IllegalArgumentException("idが空かnullです");// 例外投げる。
@@ -24,9 +25,15 @@ public final class Item {
             throw new IllegalArgumentException("unitPriceがnullか0未満です");// 例外投げる。
         }
 
+        // weightの処理
+        if (weight == null || weight.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("weightがnullか0未満です");// 例外投げる。
+        }
+
         m_id = id;
         m_name = name;
         m_unitPrice = unitPrice;
+        m_weight = weight;
     }
 
     // getter
@@ -42,11 +49,16 @@ public final class Item {
         return m_unitPrice;
     }
 
+    public BigDecimal getWeight() {
+        return m_weight;
+    }
+
     @Override
     public String toString() {
         return "Item(id=" + m_id
                 + ",name=" + m_name
-                + ",unitPrice=" + m_unitPrice + ")";
+                + ",unitPrice=" + m_unitPrice
+                + ",weight=" + m_weight + ")";
     }
 
     @Override
