@@ -7,7 +7,6 @@ public class CounterTest {
     }
 
     @Test
-    @DisplayName("判定")
     public void testConstructorWithPositiveValue() {
     }
 }
