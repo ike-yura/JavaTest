@@ -16,7 +16,7 @@ public class Counter {
 
     // カウントの初期値を指定して生成
     // 引数が0以上ならその値を採用、負の値なら0で初期化
-    Counter(final int count) {
+    public Counter(final int count) {
         if (count >= 0) {
             m_Count = count;
         } else {
@@ -31,6 +31,19 @@ public class Counter {
     // カウントを1増やす
     public void increment() {
         m_Count++;
+    }
+
+    // ==============================
+    // 減算処理
+    // ==============================
+
+    // カウントを1減らす
+    public void decrement() {
+        if (m_Count > 0) {
+            m_Count--;
+        } else {
+            throw new IllegalArgumentException("Countを0未満にできません");
+        }
     }
 
     // ==============================
