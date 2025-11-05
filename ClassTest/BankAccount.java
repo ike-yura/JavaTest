@@ -30,7 +30,9 @@ public class BankAccount {
         if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
             return false;
         }
-        m_balance = m_balance.add(amount); // BigDecimalの加算
+        BigDecimal l_newBalance = m_balance.add(amount);
+        m_balance = l_newBalance;
+        m_transactions.add(new Transaction("DEPOSIT", amount, l_newBalance, "入金"));
         return true;
     }
 
@@ -41,7 +43,9 @@ public class BankAccount {
                 || amount.compareTo(m_balance) > 0) {
             return false;
         }
-        m_balance = m_balance.subtract(amount); // BigDecimalの減算
+        BigDecimal l_newBalance = m_balance.subtract(amount);
+        m_balance = l_newBalance;
+        m_transactions.add(new Transaction("WITHDRAW", amount, l_newBalance, "出金"));
         return true;
     }
 
@@ -54,8 +58,14 @@ public class BankAccount {
         return m_owner;
     }
 
+    public List<Transaction> getTransactions() {
+        return new ArrayList<>(m_transactions);
+    }
+
     @Override
     public String toString() {
-        return "BankAccount(owner=" + m_owner + ", balance=" + m_balance + ")";
+        return "BankAccount(owner=" + m_owner
+                + ", balance=" + m_balance
+                + ",transactions=" + m_transactions.size() + "件)";
     }
 }
