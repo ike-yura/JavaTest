@@ -1,65 +1,61 @@
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
 public class BankAccount {
     // メンバ変数
-    private final String m_Owner;
-    private long m_Balance = 0;
+    private final String m_owner;
+    private BigDecimal m_balance;
+    private final List<Transaction> m_transactions;
 
     // コンストラクタ
-    public BankAccount(String owner) {
-        // ownerのnullチェック
-        if (owner == null) {
-            m_Owner = "";
-        } else {
-            m_Owner = owner;
+    public BankAccount(String owner, BigDecimal initbalance) {
+        if (owner == null || owner.isBlank()) {
+            throw new IllegalArgumentException("ownerがnullまたは空白です");
         }
-    }
-
-    // コンストラクタ
-    public BankAccount(String owner, long initbalance) {
-        // ownerのnullチェック
-        if (owner == null) {
-            m_Owner = "";
-        } else {
-            m_Owner = owner;
+        if (initbalance == null) {
+            throw new IllegalArgumentException("initbalanceがnullです");
+        }
+        if (initbalance.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("initbalanceは0以上である必要があります");
         }
 
-        if (initbalance < 0) {
-            m_Balance = 0;
-        } else {
-            m_Balance = initbalance;
-        }
+        m_owner = owner;
+        m_balance = initbalance;
+        m_transactions = new ArrayList<>();
     }
 
     // 残高に加算する
-    public boolean deposit(long amont) {
-        if (amont <= 0) {
+    public boolean deposit(BigDecimal amount) {
+        if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
             return false;
-        } else {
-            m_Balance += amont;
-            return true;
         }
+        m_balance = m_balance.add(amount); // BigDecimalの加算
+        return true;
     }
 
     // 残高から減算する
-    public boolean withdraw(long amont) {
-        if (amont <= 0 || amont > m_Balance) {
+    public boolean withdraw(BigDecimal amount) {
+        if (amount == null
+                || amount.compareTo(BigDecimal.ZERO) <= 0
+                || amount.compareTo(m_balance) > 0) {
             return false;
-        } else {
-            m_Balance -= amont;
-            return true;
         }
+        m_balance = m_balance.subtract(amount); // BigDecimalの減算
+        return true;
     }
 
     // getter setter
-    public long getBalance() {
-        return m_Balance;
+    public BigDecimal getBalance() {
+        return m_balance;
     }
 
     public String getOwner() {
-        return m_Owner;
+        return m_owner;
     }
 
     @Override
     public String toString() {
-        return "BankAccount(owner=" + m_Owner + ", balance=" + m_Balance + ")";
+        return "BankAccount(owner=" + m_owner + ", balance=" + m_balance + ")";
     }
 }
